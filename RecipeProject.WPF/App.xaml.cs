@@ -1,4 +1,7 @@
-﻿using System;
+﻿using RecipeProject.WPF.Stores;
+using RecipeProject.WPF.ViewModels;
+using RecipeProject.WPF.Views;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
@@ -13,5 +16,29 @@ namespace RecipeProject.WPF
     /// </summary>
     public partial class App : Application
     {
+        private readonly ModalNavigationStore _modalNavigationStore;
+        public App()
+        {
+            _modalNavigationStore= new ModalNavigationStore();
+        }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            var loginView = new LoginView()
+            {
+                DataContext = new LoginViewModel(_modalNavigationStore)
+            };
+            loginView.Show();
+            loginView.IsVisibleChanged += (s, ev) =>
+            {
+                if (loginView.IsVisible == false && loginView.IsLoaded)
+                {
+                    var mainView = new MainWindow();
+                    mainView.Show();
+                    loginView.Close();
+                }
+            };
+            base.OnStartup(e);
+        }
     }
 }

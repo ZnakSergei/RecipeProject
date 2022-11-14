@@ -1,4 +1,5 @@
 ﻿using RecipeProject.WPF.Commands;
+using RecipeProject.WPF.Stores;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,10 @@ namespace RecipeProject.WPF.ViewModels
         private SecureString _password;
         private string _errorMessage;
         private bool _isViewVisible = true;
+
+        private ModalNavigationStore _modalNavigationStore;
+        public ViewModelBase CurrentViewModel => _modalNavigationStore.CurrentViewModel;
+        public bool IsModalOpen => _modalNavigationStore.IsModalOpen;
 
         public string Username
         {
@@ -54,13 +59,30 @@ namespace RecipeProject.WPF.ViewModels
         }
 
         public ICommand SignInCommand { get; }
+        public ICommand CreateNewAccountCommand { get; }
         public ICommand RecoveryPasswordCommand { get; }
         public ICommand RememberPasswordCommand { get; }
 
-        public LoginViewModel()
+        public LoginViewModel(ModalNavigationStore modalNavigationStore)
         {
-            SignInCommand = new ViewModelCommand(ExecuteLoginCommand, CandExecuteLoginCommand);
+            _modalNavigationStore = modalNavigationStore;
+            _modalNavigationStore.CurrentViewModelChanged += _modalNavigationStore_CurrentViewModelChanged;
+
+            SignInCommand = new ViewModelCommand(ExecuteLoginCommand, CanExecuteLoginCommand);
             RecoveryPasswordCommand = new ViewModelCommand(ExecuteRecoverCommand);
+            CreateNewAccountCommand = new ViewModelCommand(ExecuteCreateNewAccountCommand);
+        }
+
+        private void _modalNavigationStore_CurrentViewModelChanged()
+        {
+            OnPropertyChanged(nameof(CurrentViewModel));
+            OnPropertyChanged(nameof(IsModalOpen));
+        }
+
+        private void ExecuteCreateNewAccountCommand(object obj)
+        {
+            AddNewAccountViewModel addNewAccountViewModel = new AddNewAccountViewModel(_modalNavigationStore);
+            _modalNavigationStore.CurrentViewModel = addNewAccountViewModel;
         }
 
         private void ExecuteRecoverCommand(object obj)
@@ -70,10 +92,13 @@ namespace RecipeProject.WPF.ViewModels
 
         private void ExecuteLoginCommand(object obj)
         {
-            throw new NotImplementedException();
+            if (CanExecuteLoginCommand(obj) == true)
+            {
+                IsViewVisible = false;
+            }
         }
 
-        private bool CandExecuteLoginCommand(object obj)
+        private bool CanExecuteLoginCommand(object obj)
         {
             bool validData;
             if (string.IsNullOrEmpty(Username) || Username.Length < 3 || Password == null || Password.Length < 3)
@@ -86,6 +111,12 @@ namespace RecipeProject.WPF.ViewModels
             }
 
             return validData;
+        }
+        protected override void Dispose()
+        {
+            _modalNavigationStore.CurrentViewModelChanged -= _modalNavigationStore_CurrentViewModelChanged;
+
+            base.Dispose();
         }
     }
 }

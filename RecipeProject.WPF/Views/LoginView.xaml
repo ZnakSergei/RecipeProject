@@ -3,13 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RecipeProject.WPF.Views" xmlns:viewmodels="clr-namespace:RecipeProject.WPF.ViewModels" xmlns:customcontrols="clr-namespace:RecipeProject.WPF.CustomControls"
+        xmlns:local="clr-namespace:RecipeProject.WPF.Views" 
+        xmlns:viewmodels="clr-namespace:RecipeProject.WPF.ViewModels" 
+        xmlns:customcontrols="clr-namespace:RecipeProject.WPF.CustomControls" 
+        xmlns:modalcontrol="clr-namespace:ModalControl;assembly=ModalControl"
         mc:Ignorable="d"
         Title="LoginView" Height="450" Width="800">
-    <Window.DataContext>
-        <viewmodels:LoginViewModel/>
-    </Window.DataContext>
-
+    
     <Window.Resources>
         <Style TargetType="TextBlock" x:Key="VerTextBlock">
             <Setter Property="FontSize" Value="20"/>
@@ -73,6 +73,10 @@
         </Style>
 
         <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+
+        <DataTemplate DataType="{x:Type viewmodels:AddNewAccountViewModel}">
+            <local:CreateNewAccountView/>
+        </DataTemplate>
     </Window.Resources>
 
     <Window.Visibility>
@@ -80,23 +84,30 @@
     </Window.Visibility>
 
     <Grid>
+    
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid  HorizontalAlignment="Right">
+        <modalcontrol:Modal Grid.RowSpan="2" Panel.ZIndex="1" IsOpen="{Binding IsModalOpen}">
+            <ContentControl Content="{Binding CurrentViewModel}"/>
+        </modalcontrol:Modal>
+
+        <Grid Grid.Row="0"  HorizontalAlignment="Right">
             <Button Height="50" Width="100" Margin="0 25 25 0"
                     Background="Transparent" Foreground="Black"
-                    BorderBrush="Transparent">
+                    BorderBrush="Transparent"
+                    Command="{Binding CreateNewAccountCommand}">
                 <TextBlock Text="Create new account"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
                            TextWrapping="WrapWithOverflow"/>
             </Button>
         </Grid>
-
+        
         <Grid Grid.Row="1">
+            
             <Border>
                 <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                     <TextBlock Text="Username" 
@@ -120,7 +131,6 @@
                                    VerticalAlignment="Center"
                                    TextWrapping="WrapWithOverflow"/>
                     </Button>
-
                 </StackPanel>
             </Border>
         </Grid>

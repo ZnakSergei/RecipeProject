@@ -21,6 +21,7 @@ namespace RecipeProject.WPF.Stores
         }
         public bool IsModalOpen => CurrentViewModel != null;
 
+
         public Action CurrentViewModelChanged;
 
         public void Close()
