@@ -3,9 +3,21 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:RecipeProject.WPF" xmlns:views="clr-namespace:RecipeProject.WPF.Views"
+        xmlns:local="clr-namespace:RecipeProject.WPF" xmlns:views="clr-namespace:RecipeProject.WPF.Views" xmlns:customcontrols="clr-namespace:RecipeProject.WPF.CustomControls" xmlns:components="clr-namespace:RecipeProject.WPF.Components"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+        </Grid>
     </Grid>
 </Window>

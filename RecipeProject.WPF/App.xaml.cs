@@ -24,20 +24,22 @@ namespace RecipeProject.WPF
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            var loginView = new LoginView()
-            {
-                DataContext = new LoginViewModel(_modalNavigationStore)
-            };
-            loginView.Show();
-            loginView.IsVisibleChanged += (s, ev) =>
-            {
-                if (loginView.IsVisible == false && loginView.IsLoaded)
-                {
-                    var mainView = new MainWindow();
-                    mainView.Show();
-                    loginView.Close();
-                }
-            };
+            MainWindow = new MainWindow();
+            MainWindow.Show();
+            //var loginView = new LoginView()
+            //{
+            //    DataContext = new LoginViewModel(_modalNavigationStore)
+            //};
+            //loginView.Show();
+            //loginView.IsVisibleChanged += (s, ev) =>
+            //{
+            //    if (loginView.IsVisible == false && loginView.IsLoaded)
+            //    {
+            //        var mainView = new MainWindow();
+            //        mainView.Show();
+            //        loginView.Close();
+            //    }
+            //};
             base.OnStartup(e);
         }
     }
