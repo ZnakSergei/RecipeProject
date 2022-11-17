@@ -35,11 +35,13 @@
   
     </UserControl.Resources>
     <Grid>
-        <ComboBox x:Name="cmb" FontSize="20" Width="200" Height="50"
+        <ComboBox x:Name="cmb" FontSize="20" Width="150" Height="50"
                   HorizontalAlignment="Left" VerticalAlignment="Center"
-                  ItemsSource="{Binding Source={StaticResource dataFromEnums}}">
-            
-        </ComboBox>
+                  ItemsSource="{Binding Source={StaticResource dataFromEnums}}"
+                  HorizontalContentAlignment="Center"
+                  VerticalContentAlignment="Center"/>
+
+
         <TextBlock DataContext="{Binding ElementName=cmb,Path=SelectedItem}"
                Text="Select meal" 
                Style="{StaticResource ComboBoxSelectOverlay}"/>

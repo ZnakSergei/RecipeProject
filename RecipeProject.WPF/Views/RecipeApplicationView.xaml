@@ -3,10 +3,114 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:RecipeProject.WPF.Views"
+             xmlns:local="clr-namespace:RecipeProject.WPF.Views" 
+             xmlns:customcontrols="clr-namespace:RecipeProject.WPF.CustomControls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    
+        <UserControl.Resources>
+            <Style TargetType="Button" x:Key="AddNewRecipeButton">
+                <Setter Property="Height" Value="50"/>
+                <Setter Property="Width" Value="100"/>
+                <Setter Property="Background" Value="#3186EB"/>
+                <Setter Property="Margin" Value="0 30 0 0"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <Border Background="{TemplateBinding Background}"
+                                Height="{TemplateBinding Height}"
+                                Width="{TemplateBinding Width}"
+                                CornerRadius="5">
+                                <ContentPresenter/>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+                <Style.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Trigger.EnterActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation 
+                                    Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                    To="#006FF2" 
+                                    Duration="0:0:0.2"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.EnterActions>
+
+                        <Trigger.ExitActions>
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <ColorAnimation 
+                                    Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
+                                    To="#3186EB" 
+                                    Duration="0:0:0.2"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </Trigger.ExitActions>
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </UserControl.Resources>
+
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
             
+        </Grid.ColumnDefinitions>
+
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <Grid Margin="10 10">
+                <customcontrols:ComboBoxCustom VerticalAlignment="Top"/>
+            </Grid>
+
+            <StackPanel Grid.Row="1" VerticalAlignment="Bottom"
+                        Orientation="Vertical">
+                <Button Style="{StaticResource AddNewRecipeButton}" 
+                        VerticalAlignment="Bottom"
+                        Margin="0 0 0 20">
+                    <TextBlock Text="Add new recipe" 
+                               TextWrapping="WrapWithOverflow"
+                               FontSize="16" HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Foreground="White"/>
+                </Button>
+                <Button Style="{StaticResource AddNewRecipeButton}" 
+                        VerticalAlignment="Bottom"
+                        Margin="0 0 0 20">
+                    <TextBlock Text="My recipies" 
+                               TextWrapping="WrapWithOverflow"
+                               FontSize="16" HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Foreground="White"/>
+                </Button>
+
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Menu HorizontalAlignment="Right" Margin="10 10">
+                <MenuItem>
+                    <MenuItem.Header>
+                        <TextBlock Text="Username"/>
+                    </MenuItem.Header>
+                    <MenuItem Header="Edit"/>
+                    <MenuItem Header="Log out"/>
+                </MenuItem>
+            </Menu>
+        </Grid>
     </Grid>
 </UserControl>
