@@ -27,18 +27,19 @@
             </Setter>
         </Style>
 
-        <Style TargetType="Button" x:Key="AddButton">
+        <Style TargetType="ToggleButton" x:Key="AddButton">
             <Setter Property="Height" Value="20"/>
             <Setter Property="Width" Value="50"/>
             <Setter Property="Background" Value="#3186EB"/>
-            
+            <Setter Property="FontSize" Value="16"/>
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="Button">
+                    <ControlTemplate TargetType="ToggleButton">
                         <Border Background="{TemplateBinding Background}"
                                 Height="{TemplateBinding Height}"
                                 Width="{TemplateBinding Width}"
-                                CornerRadius="5">
+                                CornerRadius="5"
+                                TextBlock.TextAlignment="Center">
                             <ContentPresenter/>
                         </Border>
                     </ControlTemplate>
@@ -46,31 +47,14 @@
             </Setter>
 
             <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Trigger.EnterActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <ColorAnimation 
-                                    Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
-                                    To="#006FF2" 
-                                    Duration="0:0:0.2"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </Trigger.EnterActions>
-
-                    <Trigger.ExitActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <ColorAnimation 
-                                    Storyboard.TargetProperty="Background.(SolidColorBrush.Color)"
-                                    To="#3186EB" 
-                                    Duration="0:0:0.2"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </Trigger.ExitActions>
+                <Trigger Property="IsChecked" Value="True">
+                    <Setter Property="Content" Value="Remove"/>
+                    <Setter Property="Background" Value="#c0c1c4"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
+
+        
     </UserControl.Resources>
     
     <Grid Width="150">
@@ -85,12 +69,16 @@
             <Border Padding="5">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
 
-                    <Button Style="{StaticResource CircleButton}">
+                    <Button Style="{StaticResource CircleButton}"
+                            Command="{Binding EditRecipeCommand}">
                         <Image Source="C:\Users\User\Documents\ZnakProjects\RecipeProject\RecipeProject.WPF\Icons\Edit_Icon.png"
                            Width="13" Height="13"/>
                     </Button>
+                    
                     <Separator Width="20" Opacity="0"/>
-                    <Button Style="{StaticResource CircleButton}">
+                    
+                    <Button Style="{StaticResource CircleButton}"
+                            Command="{Binding DeleteRecipeCommand}">
                         <Image Source="C:\Users\User\Documents\ZnakProjects\RecipeProject\RecipeProject.WPF\Icons\Delete_Icon.png"
                            Width="13" Height="13"/>
                     </Button>
@@ -100,29 +88,26 @@
 
         <Grid Grid.Row="1">
             <Border>
-                <TextBlock Text="Title" FontSize="16" MaxWidth="150" 
+                <TextBlock Text="{Binding Title}" FontSize="16" MaxWidth="150" 
                            MaxHeight="150"
                            TextWrapping="Wrap"
                            FontWeight="Bold"
                            HorizontalAlignment="Center"/>
             </Border>
         </Grid>
-        <!--#region Image there-->
+
         <Grid Grid.Row="2">
             <Border>
-                <TextBlock Text="Image"/>
+                <Image Source="{Binding ImagePath}"/>
             </Border>
         </Grid>
 
         <Grid Grid.Row="3">
             <Border Padding="10">
-                <Button Style="{StaticResource AddButton}">
-                    <TextBlock Text="Add" VerticalAlignment="Center"
-                               HorizontalAlignment="Center"
-                               FontSize="16"/>
-                </Button>
+                <ToggleButton Content="Add" 
+                              Style="{StaticResource AddButton}"
+                              Command="{Binding IsAddedRecipeCommand}"/>
             </Border>
-            
         </Grid>
     </Grid>
 </UserControl>

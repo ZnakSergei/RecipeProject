@@ -119,44 +119,44 @@
 
     <Grid MinWidth="300" MinHeight="300">
         <Border>
-                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                        <TextBlock Text="Username" 
-                               Style="{StaticResource VerTextBlock}"/>
-                        <TextBox Style="{StaticResource VerTextBox}"
-                             Text="{Binding Username, 
+            <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                <TextBlock Text="Username" 
+                           Style="{StaticResource VerTextBlock}"/>
+                <TextBox Style="{StaticResource VerTextBox}"
+                         Text="{Binding Username, 
                         UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBlock Text="Password"
-                               Style="{StaticResource VerTextBlock}"/>
-                        <customcontrols:BindablePasswordBox 
-                                    Password="{Binding Password, Mode=TwoWay,
+                <TextBlock Text="Password"
+                           Style="{StaticResource VerTextBlock}"/>
+                <customcontrols:BindablePasswordBox 
+                        Password="{Binding Password, Mode=TwoWay,
                         UpdateSourceTrigger=PropertyChanged}"/>
-                        <TextBlock Height="30" MinWidth="250"
-                               Foreground="Red"
-                               Text="{Binding ErrorMessage}"/>
-                        <StackPanel Orientation="Horizontal" 
+                <TextBlock Height="30" MinWidth="250"
+                           Foreground="Red"
+                           Text="{Binding ErrorMessage}"/>
+                <StackPanel Orientation="Horizontal" 
                             HorizontalAlignment="Stretch">
                     
-                             <Button Style="{StaticResource SignInButton}"
-                                    Command="{Binding SignUpUserCommand}">
-                                <TextBlock Text="Sign in" FontSize="20"
-                                   Foreground="White"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Center"
-                                   TextWrapping="WrapWithOverflow"/>
-                             </Button>
-                             <Button Margin="50 0 0 0"
-                                Style="{StaticResource CancelButton}"
-                                Command="{Binding CancelCommand}"
-                                VerticalAlignment="Bottom">
-                                <TextBlock Text="Cancel" FontSize="20"
+                   <Button Style="{StaticResource SignInButton}"
+                           Command="{Binding SignUpUserCommand}">
+                       <TextBlock Text="Sign in" FontSize="20"
+                                  Foreground="White"
+                                  HorizontalAlignment="Center"
+                                  VerticalAlignment="Center"
+                                  TextWrapping="WrapWithOverflow"/>
+                   </Button>
+                   <Button Margin="50 0 0 0"
+                           Style="{StaticResource CancelButton}"
+                           Command="{Binding CancelCommand}"
+                           VerticalAlignment="Bottom">
+                       <TextBlock Text="Cancel" FontSize="20"
                                    Foreground="Black"
                                    HorizontalAlignment="Center"
                                    VerticalAlignment="Center"
                                    TextWrapping="WrapWithOverflow"/>
-                             </Button>
+                    </Button>
                             
-                         </StackPanel>
-                    </StackPanel>
-                </Border>
-            </Grid>
+                 </StackPanel>
+            </StackPanel>
+        </Border>
+     </Grid>
 </UserControl>

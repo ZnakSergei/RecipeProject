@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace RecipeProject.WPF.Pages
+namespace RecipeProject.WPF.Components
 {
     /// <summary>
-    /// Interaction logic for UserRecipePage.xaml
+    /// Interaction logic for RecipeDetails.xaml
     /// </summary>
-    public partial class UserRecipePage : Page
+    public partial class RecipeDetails : UserControl
     {
-        public UserRecipePage()
+        public RecipeDetails()
         {
             InitializeComponent();
         }
