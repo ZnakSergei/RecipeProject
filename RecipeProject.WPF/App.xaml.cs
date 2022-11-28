@@ -17,14 +17,20 @@ namespace RecipeProject.WPF
     public partial class App : Application
     {
         private readonly ModalNavigationStore _modalNavigationStore;
+        private readonly SelectedRecipeStore _recipeStore;
         public App()
         {
             _modalNavigationStore= new ModalNavigationStore();
+
+            _recipeStore = new SelectedRecipeStore();
         }
 
         protected override void OnStartup(StartupEventArgs e)
         {
-            MainWindow = new MainWindow();
+            MainWindow = new MainWindow()
+            {
+                DataContext = new RecipeAplicationViewModel(_recipeStore)
+            };
             MainWindow.Show();
             //var loginView = new LoginView()
             //{

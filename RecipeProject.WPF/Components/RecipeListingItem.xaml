@@ -32,6 +32,7 @@
             <Setter Property="Width" Value="50"/>
             <Setter Property="Background" Value="#3186EB"/>
             <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Content" Value="Add"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="ToggleButton">
@@ -50,6 +51,7 @@
                 <Trigger Property="IsChecked" Value="True">
                     <Setter Property="Content" Value="Remove"/>
                     <Setter Property="Background" Value="#c0c1c4"/>
+                    <Setter Property="FontSize" Value="13"/>
                 </Trigger>
             </Style.Triggers>
         </Style>
@@ -71,15 +73,15 @@
 
                     <Button Style="{StaticResource CircleButton}"
                             Command="{Binding EditRecipeCommand}">
-                        <Image Source="C:\Users\User\Documents\ZnakProjects\RecipeProject\RecipeProject.WPF\Icons\Edit_Icon.png"
+                        <Image Source="\Icons\Edit_Icon.png"
                            Width="13" Height="13"/>
                     </Button>
                     
-                    <Separator Width="20" Opacity="0"/>
+                    <Separator Width="10" Opacity="0"/>
                     
                     <Button Style="{StaticResource CircleButton}"
                             Command="{Binding DeleteRecipeCommand}">
-                        <Image Source="C:\Users\User\Documents\ZnakProjects\RecipeProject\RecipeProject.WPF\Icons\Delete_Icon.png"
+                        <Image Source="\Icons\Delete_Icon.png"
                            Width="13" Height="13"/>
                     </Button>
                 </StackPanel>
@@ -104,8 +106,7 @@
 
         <Grid Grid.Row="3">
             <Border Padding="10">
-                <ToggleButton Content="Add" 
-                              Style="{StaticResource AddButton}"
+                <ToggleButton Style="{StaticResource AddButton}"
                               Command="{Binding IsAddedRecipeCommand}"/>
             </Border>
         </Grid>

@@ -14,5 +14,13 @@ namespace RecipeProject.WPF.Models
         public string Description { get; set; }
         public Meal Meal { get; set; }
         public bool IsAdded { get; set; }
+        public RecipeModel(string title, string imagePath, string description, Meal meal, bool isAdded)
+        {
+            Title = title;
+            ImagePath = imagePath;
+            Description = description;
+            Meal = meal;
+            IsAdded = isAdded;
+        }
     }
 }

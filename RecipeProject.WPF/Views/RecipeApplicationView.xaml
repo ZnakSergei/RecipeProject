@@ -125,14 +125,16 @@
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
 
-                <Grid>
-                    <ListBox BorderThickness="0"
-                             Margin="5 0"/>
+                <Grid ScrollViewer.VerticalScrollBarVisibility="Auto">
+
+                    <components:RecipeListing 
+                        DataContext="{Binding RecipeListingViewModel}"/>
                 </Grid>
 
                 <Grid Grid.Column="1" MinWidth="150"
                       Margin="5">
-                    <components:RecipeDetails/>
+                    <components:RecipeDetails
+                        DataContext="{Binding RecipeDetailsViewModel}"/>
                 </Grid>
             </Grid>
         </Grid>

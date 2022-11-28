@@ -15,20 +15,12 @@ namespace RecipeProject.WPF.ViewModels
         public RecipeModel RecipeModel { get; set; }
         public string Title => RecipeModel.Title;
         public string ImagePath => RecipeModel.ImagePath;
-        public bool IsAdded => RecipeModel.IsAdded;
-        public int Meal => (int)RecipeModel.Meal;
         public ICommand EditRecipeCommand { get; }
         public ICommand DeleteRecipeCommand { get; }
         public ICommand IsAddedRecipeCommand { get; }
-
-        public RecipeListingItemViewModel()
+        public RecipeListingItemViewModel(RecipeModel recipeModel)
         {
-            EditRecipeCommand = new ViewModelCommand(executeEditRecipeCommand);
-        }
-
-        private void executeEditRecipeCommand(object obj)
-        {
-            throw new NotImplementedException();
+            RecipeModel = recipeModel;
         }
     }
 }
