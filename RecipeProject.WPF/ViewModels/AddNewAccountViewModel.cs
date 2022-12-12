@@ -46,7 +46,7 @@ namespace RecipeProject.WPF.ViewModels
                 OnPropertyChanged(nameof(Password));
             }
         }
-        public ICommand SignUpUserCommand { get; set; }
+        public ICommand SignUpUserCommand { get; }
         public ICommand CancelCommand { get;  }
         public AddNewAccountViewModel(ModalNavigationStore modalNavigationStore)
         {

@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:RecipeProject.WPF.Views" xmlns:components="clr-namespace:RecipeProject.WPF.Components"
+             xmlns:local="clr-namespace:RecipeProject.WPF.Views"
+             xmlns:components="clr-namespace:RecipeProject.WPF.Components"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
@@ -12,14 +13,14 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Grid>
+        <Grid Margin="5">
             <TextBlock Text="Add new recipe"
                        FontSize="24"
                        FontWeight="Bold"/>
         </Grid>
 
         <Grid Grid.Row="1">
-            <components:RecipeDetailsForm/>
+            <components:RecipeDetailsForm DataContext="{Binding RecipeDetailsFormViewModel}"/>
         </Grid>
     </Grid>
 </UserControl>

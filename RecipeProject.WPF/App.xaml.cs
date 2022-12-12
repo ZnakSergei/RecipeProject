@@ -29,7 +29,7 @@ namespace RecipeProject.WPF
         {
             MainWindow = new MainWindow()
             {
-                DataContext = new RecipeAplicationViewModel(_recipeStore)
+                DataContext = new RecipeAplicationViewModel(_recipeStore, _modalNavigationStore)
             };
             MainWindow.Show();
             //var loginView = new LoginView()

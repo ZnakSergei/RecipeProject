@@ -3,8 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:RecipeProject.WPF.Views" 
-             xmlns:customcontrols="clr-namespace:RecipeProject.WPF.CustomControls" xmlns:components="clr-namespace:RecipeProject.WPF.Components"
+             xmlns:local="clr-namespace:RecipeProject.WPF.Views"
+             xmlns:viewmodels="clr-namespace:RecipeProject.WPF.ViewModels" 
+             xmlns:customcontrols="clr-namespace:RecipeProject.WPF.CustomControls" 
+             xmlns:components="clr-namespace:RecipeProject.WPF.Components"
+             xmlns:modalControl="clr-namespace:ModalControl;assembly=ModalControl"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     
@@ -53,8 +56,11 @@
                 </Trigger>
             </Style.Triggers>
         </Style>
-
-    </UserControl.Resources>
+            <DataTemplate DataType="{x:Type viewmodels:AddNewRecipeViewModel}">
+                <local:AddNewRecipeView/>
+            </DataTemplate>
+        </UserControl.Resources>
+   
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -62,6 +68,11 @@
             <ColumnDefinition Width="*"/>
             
         </Grid.ColumnDefinitions>
+        
+        <modalControl:Modal Grid.ColumnSpan="2" Panel.ZIndex="1" Margin="10"
+                            IsOpen="{Binding IsModalOpen}">
+            <ContentControl Content="{Binding CurrentViewModel}"/>
+        </modalControl:Modal>
 
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
@@ -89,7 +100,7 @@
                         VerticalAlignment="Bottom"
                         Margin="0 0 0 20"
                         Command="{Binding AddRecipeCommand}">
-                    <TextBlock Text="My recipies" 
+                    <TextBlock Text="My recipes" 
                                TextWrapping="WrapWithOverflow"
                                FontSize="16" HorizontalAlignment="Center"
                                VerticalAlignment="Center"
@@ -124,9 +135,10 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
+                
+                
 
                 <Grid ScrollViewer.VerticalScrollBarVisibility="Auto">
-
                     <components:RecipeListing 
                         DataContext="{Binding RecipeListingViewModel}"/>
                 </Grid>

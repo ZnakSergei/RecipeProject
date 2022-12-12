@@ -7,6 +7,7 @@ using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using RecipeProject.WPF.Commands;
 
 namespace RecipeProject.WPF.ViewModels
 {
@@ -61,13 +62,36 @@ namespace RecipeProject.WPF.ViewModels
         public RecipeDetailsFormViewModel(ModalNavigationStore modalNavigationStore)
         {
             _modalNavigationStore = modalNavigationStore;
-            _modalNavigationStore.CurrentViewModelChanged += _modalNavigationStore_CurrentViewModalChanged;
+
+            CancelCommand = new ViewModelCommand(executeCancelCommand);
+            SubmitCommand = new ViewModelCommand(executeSubmitCommand, canExecuteSubmitCommand);
         }
 
-        private void _modalNavigationStore_CurrentViewModalChanged()
+        private void executeSubmitCommand(object obj)
         {
-            OnPropertyChanged(nameof(CurrentViewModel));
-            OnPropertyChanged(nameof(IsModalOpen));
+            
         }
+
+        private bool canExecuteSubmitCommand(object obj)
+        {
+            bool validData;
+            if (string.IsNullOrEmpty(Title) || string.IsNullOrEmpty(Description))
+            {
+                validData = false;
+            }
+            else
+            {
+                validData = true;
+            }
+
+            return validData;
+        }
+
+        private void executeCancelCommand(object obj)
+        {
+            _modalNavigationStore.Close();
+        }
+
+        
     }
 }
